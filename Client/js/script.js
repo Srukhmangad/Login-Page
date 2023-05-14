@@ -17,7 +17,7 @@ const validatePasswords = () => {
   const password = passwordInput.value;
   const confirmPassword = confirmPasswordInput.value;
   if (confirmPassword !== password) {
-    matchPasswordMsg.style.display = 'block';
+    matchPasswordMsg.style.display = 'block'; 
   } else {
     matchPasswordMsg.style.display = 'none';
   }
@@ -42,11 +42,19 @@ registerBtn.addEventListener('click', () => {
       })
       .then((res) => {
         const message = res.data.message;
-        container.style.display = 'none';
-        const resultDiv = document.createElement('div');
-        resultDiv.textContent = message;
-        document.body.appendChild(resultDiv);
-        console.log(res.data);
+        console.log(message);
+
+        if(message==="failed"){
+          document.getElementById('matchPassword').innerHTML= 'User or Email already exist';
+          matchPasswordMsg.style.display = 'block';
+        }
+        else{
+          document.getElementById('matchPassword').innerHTML= 'User created successfully';
+          matchPasswordMsg.style.display = 'block';
+          //setTimeout(container.classList.add('sign-in'),5000);
+          
+        }
+        
       })
       .catch((error) => {
         console.log(error);
@@ -54,26 +62,8 @@ registerBtn.addEventListener('click', () => {
   }
 });
 
-signBtn.addEventListener('click',()=>{
-	const loginURL = 'http://localhost:3000/login';
-    axios.post(loginURL, {
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        const message = res.data.message;
-        container.style.display = 'none';
-        const resultDiv = document.createElement('div');
-        resultDiv.textContent = message;
-        document.body.appendChild(resultDiv);
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-})
 
 
 setTimeout(() => {
-  container.classList.add('sign-in');
+  container.classList.add('sign-up');
 }, 200);

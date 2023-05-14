@@ -14,7 +14,7 @@ const register = async (req, res) => {
 
     if (existingUser) {
       return res.json({
-        message: "User already exists",
+        message: "failed",
       });
     }
 
@@ -33,7 +33,7 @@ const register = async (req, res) => {
 
     if (savedUser) {
       return res.json({
-        message: "User created successfully",
+        message: "success",
       });
     }
 
